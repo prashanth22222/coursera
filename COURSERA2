@@ -1,0 +1,40 @@
+all: README.md guessinggame.sh
+	bash guessinggame.sh
+
+README.md: guessinggame.sh
+	echo "# Guessing Game Project" > README.md
+	echo "This project contains a Bash script for a guessing game." >> README.md
+	echo "" >> README.md
+	echo "## Date and Time" >> README.md
+	echo "$$(date)" >> README.md
+	echo "" >> README.md
+	echo "## Number of lines in guessinggame.sh" >> README.md
+	echo "$$(wc -l < guessinggame.sh)" >> README.md
+
+guessinggame.sh:
+	echo '#!/bin/bash' > guessinggame.sh
+	echo '' >> guessinggame.sh
+	echo '# Get the number of files in the current directory' >> guessinggame.sh
+	echo 'file_count=$$(ls -1 | wc -l)' >> guessinggame.sh
+	echo '' >> guessinggame.sh
+	echo '# Function to prompt the user and handle the guessing game' >> guessinggame.sh
+	echo 'function guessing_game {' >> guessinggame.sh
+	echo '  while true; do' >> guessinggame.sh
+	echo '    echo "Guess the number of files in the current directory:"' >> guessinggame.sh
+	echo '    read guess' >> guessinggame.sh
+	echo '' >> guessinggame.sh
+	echo '    # Check if the guess is correct' >> guessinggame.sh
+	echo '    if [[ $$guess -lt $$file_count ]]; then' >> guessinggame.sh
+	echo '      echo "Your guess is too low. Try again."' >> guessinggame.sh
+	echo '    elif [[ $$guess -gt $$file_count ]]; then' >> guessinggame.sh
+	echo '      echo "Your guess is too high. Try again."' >> guessinggame.sh
+	echo '    else' >> guessinggame.sh
+	echo '      echo "Congratulations! You guessed correctly."' >> guessinggame.sh
+	echo '      break' >> guessinggame.sh
+	echo '    fi' >> guessinggame.sh
+	echo '  done' >> guessinggame.sh
+	echo '}' >> guessinggame.sh
+	echo '' >> guessinggame.sh
+	echo '# Run the guessing game' >> guessinggame.sh
+	echo 'guessing_game' >> guessinggame.sh
+	chmod +x guessinggame.sh
